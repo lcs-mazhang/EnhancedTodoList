@@ -19,24 +19,42 @@ struct TodoListView: View {
         NavigationStack {
             VStack {
                 
-                List(items) { currentItem in
-                    Label {
-                        Text(currentItem.details)
-                    } icon: {
-                        Image(systemName: currentItem.isCompleted ? "checkmark.circle" : "circle")
+                VStack {
+                    
+                    if items.isEmpty {
+                        
+                        ContentUnavailableView(label: {
+                            Label(
+                                "Nothing to do",
+                                systemImage: "powersleep"
+                            )
+                            .foregroundStyle(.green)
+                        }, description: {
+                            Text("To-do items will appear here once you add some.")
+                        })
+                        
+                    } else {
+                        
+                        List(items) { currentItem in
+                            Label {
+                                Text(currentItem.details)
+                            } icon: {
+                                Image(systemName: currentItem.isCompleted ? "checkmark.circle" : "circle")
+                            }
+                        }
+                        
                     }
                 }
+                
+                .navigationTitle("Tasks")
             }
-            .navigationTitle("Tasks")
-        }
-        .onAppear {
-            // Populate with example data
-            if items.isEmpty {
-                items.append(contentsOf: exampleData)
+            .onAppear {
+                // Populate with example data
+                if items.isEmpty {
+                }
             }
         }
     }
-    
 }
 
 #Preview {
