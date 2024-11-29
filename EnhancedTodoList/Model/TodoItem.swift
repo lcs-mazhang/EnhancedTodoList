@@ -1,18 +1,31 @@
-//
-//  TodoItem.swift
-//  EnhancedTodoList
-//
-//  Created by GengYu Zhang on 2024-11-28.
-//
-
-import SwiftUI
-
-struct TodoItem: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+import Foundation
+ 
+struct TodoItem: Identifiable {
+    
+    let id = UUID()
+    var details: String
+    let createdOn: Date
+    var isCompleted: Bool
+    var completedOn: Date?
+    
+    init(
+        details: String,
+        createdOn: Date = Date(),
+        isCompleted: Bool = false,
+        completedOn: Date? = nil
+    ) {
+        self.details = details
+        self.createdOn = createdOn
+        self.isCompleted = isCompleted
+        self.completedOn = completedOn
     }
+ 
 }
-
-#Preview {
-    TodoItem()
-}
+ 
+let exampleData = [
+    
+    TodoItem(details: "Go for a walk"),
+    TodoItem(details: "Study for Physics"),
+    TodoItem(details: "Call mom"),
+    
+]
